@@ -1,6 +1,13 @@
-
-
-
+/* 
+  Main PDE File
+  Group2 Project 5/6/7
+  
+  Added PDEs
+    -  FloatTable
+    -  Integrator
+  
+*/
+PImage mapImage;
 
 
 FloatTable data;
@@ -21,7 +28,14 @@ PFont plotFont;
 
 void setup ()
 {
+  //  Set size of screen.
   size(730,410);
+  mapImage = loadImage("WorldReligion.png");
+  
+  //  Place General Main Title on screen.
+  
+  
+  
   data = new FloatTable("religmod1.tsv");
   columnCount = data.getColumnCount( );
    
@@ -48,8 +62,9 @@ void setup ()
 void draw()
 {
   background(224);
+  image(mapImage, 0, 0);
   // Show the plot area as a white box.
-  fill(255);
+  noFill();
   rectMode(CORNERS);
   noStroke( );
   rect(plotX1, plotY1, plotX2, plotY2);
