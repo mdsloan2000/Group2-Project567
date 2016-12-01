@@ -31,6 +31,8 @@ float yticks=0;
 float yinterval;
 
 PFont plotFont;
+float volumeInterval = 0.05;
+int dash = 0;
 
 void setup ()
 {
@@ -63,34 +65,75 @@ void setup ()
    
   years = int(data.getRowNames());
   yearMin = years[1];
-  yearMax = years[years.length - 1];
+  yearMax = years[years.length-1];
    
   dataMin = 0;
   dataMax = data.getTableMax();
  
   // adds X Interval and Tickmarks
-  xinterval = ((plotX2)/rowCount);
-  for (int counter = 0; counter < rowCount ; counter++) {
-    xticks = xticks + xinterval;
-    stroke(#460FF0);
-    line(xticks, plotY2+1, xticks, plotY2+6);
-    textAlign(CENTER,TOP);
-    fill(#0F0F01);
-    text(years[counter], xticks, plotY2+10);
-  }
+  
+  
+  stroke(#460FF0);
+  fill(#0F0F01);
+  for (int row=1; row < rowCount; row++){
+       float x = map(years[row], yearMin, yearMax, plotX1, plotX2);
+       line(x, plotY2, x, plotY2+5);
+       textAlign(CENTER,TOP);
+       text(years[row],x, plotY2+6);
+     }
+  
+  
+  
   // adds Y Interval and Tickmarks
-  yinterval = ((plotY2-plotY1)/10);
-  yticks=0+plotY1;
-  for (int counter = 10; counter > 0 ; counter--) {
-    line(plotX1-1, yticks, plotX1-6, yticks);
-    textAlign(RIGHT,CENTER);
-    text(str(counter*10)+"%", plotX1-8, yticks);
-    yticks=yticks+yinterval; 
+  
+  int counter = 0;
+  for (float v = dataMin; v <= dataMax; v+=volumeInterval){
+       float y = map(v, dataMin, dataMax, plotY2, plotY1);
+       textAlign(RIGHT, CENTER);
+       if (counter > 0) {
+         text(str(counter*10)+"%", plotX1-5, y);
+         line(plotX1, y, plotX1-5, y); // suppresses line zero
+       }
+       counter++;
+     } 
+}
+
+void keyPressed( ) {
+  resetPlotArea();
+  ;
+  if (key == '-') {
+    text ("YES",120,120);
+    if (dash < 1){
+      dash++;
+    }
+    else {
+      dash = 0;
+    }
   }
 }
 
 void draw(){
+  drawGrid();
   displayStatistic();
   
 }
-   
+
+
+
+void drawGrid() {
+  fill(0);
+  stroke(224);
+  strokeWeight(1);
+  textSize(10);
+  textAlign(RIGHT, CENTER);
+   if (dash == 0) {
+     for (int row=0; row < rowCount; row++){
+       float x = map(years[row], yearMin, yearMax, plotX1, plotX2);
+       line(x, plotY1, x, plotY2);
+     }
+     for (float v = dataMin; v <= dataMax; v+=volumeInterval){
+       float y = map(v, dataMin, dataMax, plotY2, plotY1);
+       line(plotX1, y, plotX2, y);
+     }
+  }
+}
