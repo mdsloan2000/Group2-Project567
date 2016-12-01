@@ -35,12 +35,12 @@ PFont plotFont;
 void setup ()
 {
   //  Set size of screen and background.
-  size(800,460);
+  size(730,410);
   background(#FAF7BB);
     
   //  Create plot corner coordinates.
   plotX1 = 50;
-  plotX2 = width - 125;                   // Added extra space on the left to hold statistic specific legends.
+  plotX2 = width - plotX1;
   plotY1 = 50;
   plotY2 = height - plotY1;
 
@@ -50,9 +50,7 @@ void setup ()
   rect(plotX1, plotY1, plotX2, plotY2);   // Sets corner coordintes.
 
   // Optional Image background
-  mapImage = loadImage("WorldReligion.png");  // Add Licensed worldreligion image.
-  mapImage.resize(625,0);                     // Resize image to match target width.
-  image(mapImage, plotX1, plotY1+40);
+  // mapImage = loadImage("WorldReligion.png");
   
   //  Place General Main Title on screen.
 
@@ -68,29 +66,81 @@ void setup ()
   dataMin = 0;
   dataMax = data.getTableMax();
  
-  // adds X Interval and Tickmarks
   xinterval = ((plotX2)/rowCount);
+  text(xinterval, 50,50);
   for (int counter = 0; counter < rowCount ; counter++) {
     xticks = xticks + xinterval;
     stroke(#460FF0);
-    line(xticks, plotY2+1, xticks, plotY2+6);
+    line(xticks, plotY2, xticks, plotY2-10);
     textAlign(CENTER,TOP);
     fill(#0F0F01);
     text(years[counter], xticks, plotY2+10);
   }
-  // adds Y Interval and Tickmarks
-  yinterval = ((plotY2-plotY1)/10);
-  yticks=0+plotY1;
-  for (int counter = 10; counter > 0 ; counter--) {
-    line(plotX1-1, yticks, plotX1-6, yticks);
-    textAlign(RIGHT,CENTER);
-    text(str(counter*10)+"%", plotX1-8, yticks);
-    yticks=yticks+yinterval; 
-  }
-}
-
-void draw(){
-  displayStatistic();
+ 
+  // Adds Tickmarks
+  
+  
+  // x-Axis - Years
+  
+  // y-Axis - Percent Practicing
+  
+ 
+  
+ 
+ plotFont = createFont("SansSerif", 20);
+ textFont(plotFont); 
+  
+  smooth( );
   
 }
-   
+
+void draw()
+{
+  // Create the Plot Area
+  
+  
+  
+  
+  /*
+  text(yearMin,20,20);
+  text(yearMax,20,40);
+  */
+  
+ // image(mapImage, 0, 0);
+  
+}
+
+{
+  
+  // Show the plot area as a white box.
+  /*
+  noFill();
+  rectMode(CORNERS);
+  noStroke( );
+  rect(plotX1, plotY1, plotX2, plotY2);
+  */
+  /*
+  // Draw the title of the current plot.
+  fill(0);
+  textSize(20);
+  String title = data.getColumnName(currentColumn);
+  text(title, plotX1, plotY1 - 10);
+  stroke(#5679C1);
+  strokeWeight(5);
+  drawDataPoints(currentColumn);
+  */
+}
+/*
+// Draw the data as a series of points.
+void drawDataPoints(int col) {
+int rowCount = data.getRowCount( );
+for (int row = 0; row < rowCount; row++) {
+if (data.isValid(row, col)) {
+float value = data.getFloat(row, col);
+float x = map(years[row], yearMin, yearMax, plotX1, plotX2);
+float y = map(value, dataMin, dataMax, plotY2, plotY1);
+point(x, y);
+}
+}
+}
+*/
