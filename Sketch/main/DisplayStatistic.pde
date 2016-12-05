@@ -1,16 +1,16 @@
-int displayStatistic()
+/*int displayStatistic()
 {
-  plotFont = createFont("SansSerif", 20);
+  /*plotFont = createFont("SansSerif", 20);
   textFont(plotFont); 
   smooth( );
   fill(0);
   textSize(20);
   String title = data.getColumnName(currentColumn);
   textAlign(LEFT,BOTTOM);
-  text(title, plotX1, plotY1 - 10);
+  text(title, plotX1, plotY1 - 10);*/
   
   //drawGrid();
-  
+/*  
   stroke(#5679C1);
   strokeWeight(5);
   drawDataPoints(currentColumn);
@@ -19,7 +19,9 @@ int displayStatistic()
 }
 
 // Draw the data as a series of points.
-void drawDataPoints(int col) {
+/*void drawDataPoints(int col) {
+  stroke(#5679C1);
+  strokeWeight(5);
 int rowCount = data.getRowCount( );
   for (int row = 0; row < rowCount; row++) {
     if (data.isValid(row, col)) {
@@ -29,8 +31,8 @@ int rowCount = data.getRowCount( );
       point(x, y);
     }
   }
-}
-
+}*/
+/*
 void resetPlotArea() {
  fill(255);                              // Sets background for plot area.
   rectMode(CORNERS);                      // Plots rectangle by corner values.
@@ -39,8 +41,8 @@ void resetPlotArea() {
 
   // Optional Image background
   mapImage = loadImage("WorldReligion.png");  // Add Licensed worldreligion image.
-  mapImage.resize(625,0);                     // Resize image to match target width.
-  image(mapImage, plotX1, plotY1+40); 
+  mapImage.resize(705,0);                     // Resize image to match target width.
+  image(mapImage, plotX1, plotY1); 
 }
 
 
